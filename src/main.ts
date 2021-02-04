@@ -1,6 +1,6 @@
 import yargs = require('yargs/yargs');
 
-import { Printer } from 'ipp';
+import printer from './printer';
 
 const argv = yargs(process.argv.slice(2)).options({
   server: {
@@ -11,27 +11,10 @@ const argv = yargs(process.argv.slice(2)).options({
   },
 }).argv;
 
-const printer = new Printer(`http://${argv.server.toLowerCase()}.local.`);
+(async () => {
+  const instance = printer(argv.server);
 
-printer.execute('Get-Printer-Attributes', {
-  'operation-attributes-tag': {
-    'requesting-user-name': 'patti',
-    'requested-attributes': [
-      'printer-info',
-      'operations-supported',
-      'printer-icons',
-      'copies-supported',
-      'pdf-versions-supported',
-      'media-source-supported',
-      'job-creation-attributes-supported',
-      'print-quality-supported',
-      'sides-supported',
-      'media-supported',
-      'print-color-mode-supported',
-      'document-format-supported',
-      'ipp-features-supported',
-    ],
-  },
-}, (_, response) => {
-  console.log(response);
-});
+  const attributes = await instance.getInfo();
+
+  console.log(attributes);
+})();
