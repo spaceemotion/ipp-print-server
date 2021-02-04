@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+.vscode
+*.local
+
+# project stuff
+bin
+out

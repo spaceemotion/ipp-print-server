@@ -1,0 +1,30 @@
+{
+  "name": "ipp-print-server",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "nodemon --exec node --loader ts-node/esm ./src/main.ts --server NPIC73C91 --watch src --ext .ts",
+    "build": "tsc",
+    "package": "pkg package.json --out-path=bin"
+  },
+  "bin": "out/main.js",
+  "sourceType": "module",
+  "pkg": {
+    "scripts": "out/**/*.js",
+    "targets": [
+      "latest-win-x64"
+    ]
+  },
+  "dependencies": {
+    "ipp": "^2.0.1",
+    "yargs": "^17.0.0-candidate.0"
+  },
+  "devDependencies": {
+    "@types/ipp": "^2.0.0",
+    "@types/node": "^14.14.22",
+    "@types/yargs": "^16.0.0",
+    "nodemon": "^2.0.7",
+    "pkg": "^4.4.9",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
